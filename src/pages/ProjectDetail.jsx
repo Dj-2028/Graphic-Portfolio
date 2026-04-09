@@ -128,26 +128,37 @@ const ProjectDetail = () => {
               {/* Gallery */}
               <div className="flex flex-col gap-4">
                 <div className="label-line mb-2">Gallery</div>
-                {project.gallery.map((img, i) => (
-                  <motion.div
-                    key={i}
-                    className="overflow-hidden"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '0px 0px -60px 0px' }}
-                    transition={{ duration: 0.7, delay: i * 0.1, ease: [0.33, 1, 0.68, 1] }}
-                  >
-                    <motion.img
-                      src={img}
-                      alt={`${project.title} — gallery image ${i + 1}`}
-                      className="w-full object-cover"
-                      style={{ aspectRatio: i === 0 ? '16/9' : '4/3' }}
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.5 }}
-                      loading="lazy"
-                    />
-                  </motion.div>
-                ))}
+                {project.gallery.map((file, i) => {
+                  const isVideo = file.toLowerCase().endsWith('.mp4') || file.toLowerCase().endsWith('.webm')
+                  const isPdf = file.toLowerCase().endsWith('.pdf')
+                  
+                  return (
+                    <motion.div
+                      key={i}
+                      className="overflow-hidden"
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '0px 0px -60px 0px' }}
+                      transition={{ duration: 0.7, delay: i * 0.1, ease: [0.33, 1, 0.68, 1] }}
+                    >
+                      {isVideo ? (
+                        <video src={file} autoPlay loop muted playsInline className="w-full object-cover" style={{ aspectRatio: i === 0 ? '16/9' : '4/3' }} />
+                      ) : isPdf ? (
+                        <iframe src={file} className="w-full h-[80vh] border-none bg-white" title={`${project.title} — document ${i + 1}`} />
+                      ) : (
+                        <motion.img
+                          src={file}
+                          alt={`${project.title} — gallery item ${i + 1}`}
+                          className="w-full object-cover"
+                          style={{ aspectRatio: i === 0 ? '16/9' : '4/3' }}
+                          whileHover={{ scale: 1.02 }}
+                          transition={{ duration: 0.5 }}
+                          loading="lazy"
+                        />
+                      )}
+                    </motion.div>
+                  )
+                })}
               </div>
             </div>
           </div>
