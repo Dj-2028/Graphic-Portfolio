@@ -1,13 +1,13 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { PenTool, Monitor, PlayCircle, FileText } from 'lucide-react'
+import { PenTool, Monitor, Smartphone, FileText } from 'lucide-react'
 import { services, processSteps } from '@/data/services'
 import RevealText from '@/components/common/RevealText'
 
 const iconMap = {
   'pen-tool':    PenTool,
   'monitor':     Monitor,
-  'play-circle': PlayCircle,
+  'smartphone':  Smartphone,
   'file-text':   FileText,
 }
 

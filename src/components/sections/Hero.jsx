@@ -1,43 +1,73 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import SplitText from '@/components/common/SplitText'
 import MagneticButton from '@/components/common/MagneticButton'
 
-const tagline = ['Brand', 'UI/UX', 'Motion', 'Print']
+const tagline = ['Brand', 'UI/UX', 'Social', 'Print']
 
 const Hero = () => {
   const [ready, setReady] = useState(false)
 
+  // Mouse tracking setup
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  const smoothX = useSpring(mouseX, { damping: 50, stiffness: 400 })
+  const smoothY = useSpring(mouseY, { damping: 50, stiffness: 400 })
+
+  // Transform vectors for parallax
+  const titleX = useTransform(smoothX, [-0.5, 0.5], [-25, 25])
+  const titleY = useTransform(smoothY, [-0.5, 0.5], [-25, 25])
+  const blob1X = useTransform(smoothX, [-0.5, 0.5], [-60, 60])
+  const blob1Y = useTransform(smoothY, [-0.5, 0.5], [-60, 60])
+  const blob2X = useTransform(smoothX, [-0.5, 0.5], [60, -60])
+  const blob2Y = useTransform(smoothY, [-0.5, 0.5], [60, -60])
+  const stampX = useTransform(smoothX, [-0.5, 0.5], [15, -15])
+  const stampY = useTransform(smoothY, [-0.5, 0.5], [15, -15])
+
   useEffect(() => {
     const t = setTimeout(() => setReady(true), 100)
-    return () => clearTimeout(t)
-  }, [])
+    
+    // Mouse move listener for parallax
+    const handleMouseMove = (e) => {
+      mouseX.set(e.clientX / window.innerWidth - 0.5)
+      mouseY.set(e.clientY / window.innerHeight - 0.5)
+    }
+    
+    window.addEventListener('mousemove', handleMouseMove)
+    
+    return () => {
+      clearTimeout(t)
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [mouseX, mouseY])
 
   return (
     <section
       id="hero"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-bg-primary"
     >
-      {/* Animated mesh gradient background */}
+      {/* Animated parallax mesh background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          className="absolute -top-1/4 -left-1/4 w-[80vw] h-[80vw] rounded-full opacity-[0.04]"
-          style={{
-            background: 'radial-gradient(circle, #FFD60A 0%, transparent 70%)',
-          }}
-          animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute -bottom-1/4 -right-1/4 w-[70vw] h-[70vw] rounded-full opacity-[0.035]"
-          style={{
-            background: 'radial-gradient(circle, #FF4D1C 0%, transparent 70%)',
-          }}
-          animate={{ x: [0, -25, 0], y: [0, 20, 0] }}
-          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
+        <motion.div style={{ x: blob1X, y: blob1Y }} className="absolute -top-1/4 -left-1/4 w-[80vw] h-[80vw]">
+          <motion.div
+            className="w-full h-full rounded-full opacity-[0.04]"
+            style={{ background: 'radial-gradient(circle, #FFD60A 0%, transparent 70%)' }}
+            animate={{ scale: [1, 1.05, 1], opacity: [0.03, 0.05, 0.03] }}
+            transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </motion.div>
+
+        <motion.div style={{ x: blob2X, y: blob2Y }} className="absolute -bottom-1/4 -right-1/4 w-[70vw] h-[70vw]">
+          <motion.div
+            className="w-full h-full rounded-full opacity-[0.035]"
+            style={{ background: 'radial-gradient(circle, #FF4D1C 0%, transparent 70%)' }}
+            animate={{ scale: [1, 1.1, 1], opacity: [0.03, 0.04, 0.03] }}
+            transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          />
+        </motion.div>
       </div>
 
       <div className="container-site relative z-10 pt-32 pb-20">
@@ -72,9 +102,9 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Hero headline */}
-        <div className="mb-10">
-          <h1 className="text-fluid-hero font-display font-bold leading-[0.88] tracking-tight text-text-primary uppercase">
+        {/* Hero headline with Mouse Parallax */}
+        <motion.div className="mb-10 relative" style={{ x: titleX, y: titleY }}>
+          <h1 className="text-fluid-hero font-display font-bold leading-[0.88] tracking-tight text-text-primary uppercase relative z-10 w-fit">
             <SplitText text="Diksha" delay={0.3} animate={ready} />
             <br />
             <span className="flex items-end gap-4 flex-wrap">
@@ -90,7 +120,31 @@ const Hero = () => {
               </motion.span>
             </span>
           </h1>
-        </div>
+
+          {/* Animated Spinning Stamp */}
+          <motion.div 
+            className="absolute -right-8 -top-8 md:-right-16 md:-top-16 w-32 h-32 md:w-40 md:h-40 rounded-full border border-border/30 hidden sm:flex items-center justify-center opacity-40 mix-blend-difference pointer-events-none"
+            style={{ x: stampX, y: stampY }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={ready ? { opacity: 0.5, scale: 1 } : {}}
+            transition={{ delay: 1, duration: 1 }}
+          >
+            <motion.div 
+              className="w-full h-full relative"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+            >
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
+                <text>
+                  <textPath href="#circlePath" className="font-mono-custom text-[0.45rem] tracking-[0.25em] fill-text-primary uppercase">
+                    · Diksha Jain · Graphic Portfolio · 2024
+                  </textPath>
+                </text>
+              </svg>
+            </motion.div>
+          </motion.div>
+        </motion.div>
 
         {/* Subtitle row */}
         <motion.div
@@ -154,7 +208,7 @@ const Hero = () => {
         >
           {Array(8).fill(null).map((_, i) => (
             <span key={i} className="font-mono-custom text-[0.6rem] tracking-[0.3em] uppercase text-text-muted flex-shrink-0">
-              Brand Identity · UI/UX Design · Motion · Editorial · Packaging ·
+              Brand Identity · UI/UX Design · Social Media · Editorial · Packaging ·
             </span>
           ))}
         </motion.div>

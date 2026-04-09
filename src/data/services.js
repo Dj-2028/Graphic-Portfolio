@@ -15,10 +15,10 @@ export const services = [
   },
   {
     id: '03',
-    title: 'Motion Design',
-    description: 'Brand animations, title sequences, and social content that make still ideas move with purpose.',
-    icon: 'play-circle',
-    tags: ['After Effects', 'Lottie', 'Brand Motion'],
+    title: 'Social Media Design',
+    description: 'Engaging, on-brand creatives and layout designs for digital platforms that capture attention and communicate effectively.',
+    icon: 'smartphone',
+    tags: ['Templates', 'Thumbnails', 'Content'],
   },
   {
     id: '04',
