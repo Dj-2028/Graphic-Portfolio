@@ -1,0 +1,294 @@
+/* ─────────────────────────────────────────── */
+/* Google Fonts Import (must be first)          */
+/* ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────── */
+/* CSS Custom Properties                        */
+/* ─────────────────────────────────────────── */
+@layer base {
+  :root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --bg-card: #161616;
+    --text-primary: #f5f0e8;
+    --text-secondary: #9a9488;
+    --text-muted: #4a4640;
+    --accent: #ffd60a;
+    --accent-red: #ff4d1c;
+    --accent-green: #00ff85;
+    --border: rgba(245, 240, 232, 0.08);
+    --border-light: rgba(245, 240, 232, 0.15);
+  }
+
+  /* Reset cursor for custom cursor */
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    scroll-behavior: auto; /* Lenis handles this */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: var(--bg-primary);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Text selection */
+  ::selection {
+    background: var(--accent);
+    color: #0a0a0a;
+  }
+
+  ::-moz-selection {
+    background: var(--accent);
+    color: #0a0a0a;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+  }
+}
+
+/* ─────────────────────────────────────────── */
+/* Film Grain Overlay                           */
+/* ─────────────────────────────────────────── */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  animation: grain 0.5s steps(1) infinite;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─────────────────────────────────────────── */
+/* Utility Classes                              */
+/* ─────────────────────────────────────────── */
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-mono-custom {
+    font-family: 'DM Mono', monospace;
+  }
+
+  .text-fluid-hero {
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+
+  .text-fluid-h2 {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .text-fluid-h3 {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    line-height: 1.2;
+  }
+
+  /* Section spacing */
+  .section-padding {
+    padding-top: clamp(5rem, 10vw, 9rem);
+    padding-bottom: clamp(5rem, 10vw, 9rem);
+  }
+
+  /* Max-width container */
+  .container-site {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1.5rem, 5vw, 5rem);
+    padding-right: clamp(1.5rem, 5vw, 5rem);
+  }
+
+  /* Text stroke / outline variant */
+  .text-stroke {
+    -webkit-text-stroke: 1px var(--text-primary);
+    color: transparent;
+  }
+
+  .text-stroke-accent {
+    -webkit-text-stroke: 1px var(--accent);
+    color: transparent;
+  }
+
+  /* Animated border gradient */
+  .border-gradient {
+    position: relative;
+    background: var(--bg-card);
+  }
+
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 214, 10, 0.2),
+      rgba(245, 240, 232, 0.05),
+      rgba(255, 77, 28, 0.1)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Horizontal line with label */
+  .label-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .label-line::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Clip path helpers */
+  .clip-reveal {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .clip-reveal-done {
+    clip-path: inset(0 0% 0 0);
+  }
+
+  /* Image render */
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Overflow hidden for text reveal */
+  .overflow-clip {
+    overflow: hidden;
+  }
+
+  /* Aspect ratios */
+  .aspect-project {
+    aspect-ratio: 4/3;
+  }
+
+  .aspect-hero {
+    aspect-ratio: 16/9;
+  }
+
+  /* Hover magnetic parent */
+  [data-magnetic] {
+    display: inline-block;
+  }
+}
+
+/* ─────────────────────────────────────────── */
+/* Page Transition Layer                        */
+/* ─────────────────────────────────────────── */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--accent);
+  z-index: 9998;
+  transform-origin: left;
+}
+
+/* ─────────────────────────────────────────── */
+/* Loader Typography                            */
+/* ─────────────────────────────────────────── */
+.loader-counter {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(4rem, 12vw, 12rem);
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────── */
+/* Custom Form Styles (dark override)           */
+/* ─────────────────────────────────────────── */
+.form-field {
+  position: relative;
+  border-bottom: 1px solid var(--border-light);
+  transition: border-color 0.3s ease;
+}
+
+.form-field:focus-within {
+  border-color: var(--accent);
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  padding: 1rem 0;
+  resize: none;
+}
+
+.form-field label {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.form-field input:focus ~ label,
+.form-field input:not(:placeholder-shown) ~ label,
+.form-field textarea:focus ~ label,
+.form-field textarea:not(:placeholder-shown) ~ label {
+  top: -0.75rem;
+  font-size: 0.65rem;
+  color: var(--accent);
+}
