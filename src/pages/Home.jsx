@@ -12,7 +12,7 @@ const Home = () => {
     <PageWrapper>
       <Helmet>
         <title>Diksha Jain — Graphic Designer</title>
-        <meta name="description" content="Portfolio of Diksha Jain — graphic designer specialising in brand identity, UI/UX, motion design, and editorial print work. Based in Mumbai." />
+        <meta name="description" content="Portfolio of Diksha Jain — graphic designer specialising in brand identity, UI/UX, motion design, and editorial print work. Based in Indore." />
       </Helmet>
 
       <Hero />

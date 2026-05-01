@@ -131,9 +131,9 @@ const Skills = () => {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 mt-12">
               {[
-                { value: '4+', label: 'Years Experience' },
+                { value: '2+', label: 'Years Experience' },
                 { value: '40+', label: 'Projects Delivered' },
-                { value: '20+', label: 'Happy Clients' },
+                { value: '10+', label: 'Happy Clients' },
               ].map(({ value, label }) => (
                 <div key={label} className="text-center border border-border p-5 rounded-sm">
                   <div className="font-display font-bold text-3xl text-accent-yellow mb-1">{value}</div>

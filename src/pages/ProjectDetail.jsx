@@ -142,15 +142,14 @@ const ProjectDetail = () => {
                       transition={{ duration: 0.7, delay: i * 0.1, ease: [0.33, 1, 0.68, 1] }}
                     >
                       {isVideo ? (
-                        <video src={file} autoPlay loop muted playsInline className="w-full object-cover" style={{ aspectRatio: i === 0 ? '16/9' : '4/3' }} />
+                        <video src={file} autoPlay loop muted playsInline className="w-full h-auto" />
                       ) : isPdf ? (
                         <iframe src={file} className="w-full h-[80vh] border-none bg-white" title={`${project.title} — document ${i + 1}`} />
                       ) : (
                         <motion.img
                           src={file}
                           alt={`${project.title} — gallery item ${i + 1}`}
-                          className="w-full object-cover"
-                          style={{ aspectRatio: i === 0 ? '16/9' : '4/3' }}
+                          className="w-full h-auto object-cover"
                           whileHover={{ scale: 1.02 }}
                           transition={{ duration: 0.5 }}
                           loading="lazy"

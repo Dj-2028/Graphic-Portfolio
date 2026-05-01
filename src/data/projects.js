@@ -1,3 +1,30 @@
+// All marketing poster images — numbered + named files
+const NUMBERED_POSTERS = [
+  1, 2, 3, 5, 6, 7, 8, 9, 10,
+  11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+  31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+  41, 42, 43,
+]
+
+const NAMED_POSTERS = [
+  { id: 'p1',   src: '/assets/marketing-posters/Page 1.png',                                      alt: 'Marketing Poster — Page 1' },
+  { id: 'p2',   src: '/assets/marketing-posters/Page 2.png',                                      alt: 'Marketing Poster — Page 2' },
+  { id: 'p3',   src: '/assets/marketing-posters/2_20251017_151214_0001.png',                       alt: 'Marketing Poster' },
+  { id: 'p4',   src: '/assets/marketing-posters/ADION VISUALS (PRICING PDF) .png',                 alt: 'Adion Visuals Pricing' },
+  { id: 'p5',   src: '/assets/marketing-posters/done.png',                                        alt: 'Marketing Poster' },
+  { id: 'p6',   src: '/assets/marketing-posters/done (2).png',                                    alt: 'Marketing Poster' },
+  { id: 'p7',   src: '/assets/marketing-posters/Copy of 1_20251006_090518_0000.png',              alt: 'Marketing Poster' },
+  { id: 'p8',   src: '/assets/marketing-posters/Copy of 5_20251017_151214_0004.png',              alt: 'Marketing Poster' },
+  { id: 'p9',   src: '/assets/marketing-posters/Copy of Enginow_Webinar_Post_AI.png',             alt: 'Enginow Webinar Post' },
+  { id: 'p10',  src: '/assets/marketing-posters/Copy of Full Stack Developer Intern -...png',     alt: 'Full Stack Developer Post' },
+]
+
+export const marketingPosters = [
+  ...NUMBERED_POSTERS.map((n) => ({ id: n, src: `/assets/marketing-posters/${n}.png`, alt: `Marketing Poster ${n}` })),
+  ...NAMED_POSTERS,
+]
+
 export const projects = [
   {
     id: '01',
@@ -9,12 +36,15 @@ export const projects = [
     client: 'Bloom Cosmetics',
     role: 'Visual Designer',
     tools: ['Photoshop', 'Illustrator', 'Figma'],
-    thumbnail: '/assets/marketing-posters/Copy of 1_20251006_090518_0000.png',
-    heroImage: '/assets/marketing-posters/Copy of 1_20251006_090518_0000.png',
+    thumbnail: '/assets/marketing-posters/1.png',
+    heroImage: '/assets/marketing-posters/1.png',
     gallery: [
-      '/assets/marketing-posters/Copy of 6_20251018_231115_0005.png',
-      '/assets/marketing-posters/Copy of Enginow_Webinar_Post_AI.png',
-      '/assets/marketing-posters/Copy of Full Stack Developer Intern – We’re Hiring.png',
+      '/assets/marketing-posters/2.png',
+      '/assets/marketing-posters/3.png',
+      '/assets/marketing-posters/5.png',
+      '/assets/marketing-posters/6.png',
+      '/assets/marketing-posters/7.png',
+      '/assets/marketing-posters/8.png',
     ],
     description: 'A bold multi-platform marketing campaign with digital ads and social content designed to launch a new product line.',
     caseStudy: 'The campaign needed to cut through a saturated market. We built a visual language making each piece instantly recognisable in a social feed.',

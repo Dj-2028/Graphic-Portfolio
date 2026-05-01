@@ -5,11 +5,9 @@ import MagneticButton from '@/components/common/MagneticButton'
 import RevealText from '@/components/common/RevealText'
 
 const SOCIAL_LINKS = [
-  { label: 'Instagram', url: '#' },
-  { label: 'Dribbble',  url: '#' },
-  { label: 'Behance',   url: '#' },
-  { label: 'LinkedIn',  url: '#' },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/diksha-jain-b30457334?utm_source=share_via&utm_content=profile&utm_medium=member_android' },
 ]
+
 
 const FloatingField = ({ id, label, type = 'text', as = 'input', required, value, onChange }) => {
   const filled = value?.length > 0
@@ -55,8 +53,18 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setStatus('sending')
-    // Simulate sending
-    setTimeout(() => setStatus('done'), 1500)
+
+    const subject = encodeURIComponent(`Portfolio Enquiry from ${form.name}`)
+    const body = encodeURIComponent(
+      `Hi Diksha,\n\nMy name is ${form.name}.\n\n${form.message}\n\nReply to: ${form.email}`
+    )
+    const mailtoUrl = `mailto:dikshajain2026@gmail.com?subject=${subject}&body=${body}`
+
+    // Open the email client
+    window.location.href = mailtoUrl
+
+    // Mark as done after short delay
+    setTimeout(() => setStatus('done'), 800)
   }
 
   return (
@@ -85,17 +93,17 @@ const Contact = () => {
                 <span className="font-mono-custom text-[0.65rem] tracking-[0.15em] uppercase text-text-muted w-24">
                   Location
                 </span>
-                <span className="font-mono-custom text-[0.7rem] text-text-secondary">Mumbai, India</span>
+                <span className="font-mono-custom text-[0.7rem] text-text-secondary">Indore, India</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="font-mono-custom text-[0.65rem] tracking-[0.15em] uppercase text-text-muted w-24">
                   Email
                 </span>
                 <a
-                  href="mailto:hello@dikshajain.com"
+                  href="mailto:dikshajain2026@gmail.com"
                   className="font-mono-custom text-[0.7rem] text-text-secondary hover:text-accent-yellow transition-colors"
                 >
-                  hello@dikshajain.com
+                 dikshajain2026@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-3">

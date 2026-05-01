@@ -4,10 +4,7 @@ import MagneticButton from '@/components/common/MagneticButton'
 import { ArrowUp } from 'lucide-react'
 
 const SOCIAL_LINKS = [
-  { label: 'Instagram', url: '#' },
-  { label: 'Dribbble',  url: '#' },
-  { label: 'Behance',   url: '#' },
-  { label: 'LinkedIn',  url: '#' },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/diksha-jain-b30457334?utm_source=share_via&utm_content=profile&utm_medium=member_android' },
 ]
 
 const NAV_LINKS = [
@@ -80,10 +77,10 @@ const Footer = () => {
             ))}
           </div>
           <a
-            href="mailto:hello@dikshajain.com"
+            href="mailto:dikshajain2026@gmail.com"
             className="mt-2 font-mono-custom text-[0.7rem] text-text-secondary hover:text-text-primary transition-colors"
           >
-            hello@dikshajain.com
+           dikshajain2026@gmail.com
           </a>
         </div>
       </div>

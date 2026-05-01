@@ -4,7 +4,7 @@ import { Download } from 'lucide-react'
 import MagneticButton from '@/components/common/MagneticButton'
 import RevealText from '@/components/common/RevealText'
 
-const whatIDo = ['Brand Identity', 'UI / UX', 'Motion Design', 'Print & Editorial', 'Packaging', 'Art Direction']
+const whatIDo = ['Brand Identity', 'UI / UX', 'Social Media Design', 'Print & Editorial', 'Packaging', 'Art Direction']
 
 const About = () => {
   const imgRef = useRef(null)
@@ -53,7 +53,7 @@ const About = () => {
               animate={imgInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.7, duration: 0.5 }}
             >
-              <span className="font-display font-bold text-2xl text-accent-yellow">4+</span>
+              <span className="font-display font-bold text-2xl text-accent-yellow">2+</span>
               <span className="font-mono-custom text-[0.6rem] tracking-[0.1em] uppercase text-text-muted">
                 Years of craft
               </span>
@@ -77,7 +77,7 @@ const About = () => {
                 delay={0.1}
                 className="font-mono-custom text-[0.75rem] leading-loose text-text-secondary"
               >
-                I'm Diksha — a graphic designer based in Mumbai with a deep obsession for the intersection of ideas and aesthetics. I believe every element on a surface should earn its place.
+                I'm Diksha — a graphic designer based in Indore with a deep obsession for the intersection of ideas and aesthetics. I believe every element on a surface should earn its place.
               </RevealText>
               <RevealText
                 as="p"
@@ -111,8 +111,8 @@ const About = () => {
             <MagneticButton strength={0.3} className="self-start mt-2">
               <a
                 id="download-resume"
-                href="/resume.pdf"
-                download
+                href="/assets/Diksha_CV.pdf"
+                download="Diksha_Jain_CV.pdf"
                 className="group flex items-center gap-3 border border-border-light px-6 py-3 font-mono-custom text-[0.65rem] tracking-[0.15em] uppercase text-text-secondary hover:border-accent-yellow hover:text-accent-yellow transition-all duration-300"
               >
                 <Download size={13} className="group-hover:translate-y-0.5 transition-transform" />
